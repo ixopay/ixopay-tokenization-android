@@ -20,9 +20,11 @@ This SDK enables you to tokenize card data natively from your Android applicatio
 - Start the demo application
 
 ## Development
-### Dependencies
 
+### Requirements
 - Java 8 or higher
+
+### Dependencies
 - [org.json](https://github.com/stleary/JSON-java) (built-in Android)
 - [OkHttp 3.x](http://square.github.io/okhttp/) (built-in Android 4.4 or higher)
 
