@@ -4,8 +4,8 @@ This SDK enables you to tokenize card data natively from your Android applicatio
 
 ## Usage
 
-- See [![](https://jitpack.io/v/ixolit/ixopay-tokenization-android.svg)](https://jitpack.io/#ixolit/ixopay-tokenization-android) 
-- [Javadoc](https://javadoc.jitpack.io/com/github/ixolit/ixopay-tokenization-android/latest/javadoc/index.html)
+- See [![](https://jitpack.io/v/ixopay/ixopay-tokenization-android.svg)](https://jitpack.io/#ixopay/ixopay-tokenization-android)
+- [Javadoc](https://javadoc.jitpack.io/com/ixopay/ixopay-tokenization-android/latest/javadoc/index.html)
 
 
 ## Examples

@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 apply plugin: 'maven'
 
-group = 'com.github.ixolit'
+group = 'com.ixopay'
 version = '1.0.0'
 
 sourceCompatibility = '1.8'

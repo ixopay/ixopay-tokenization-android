@@ -23,6 +23,8 @@ before_script:
 
 build:
   stage: build
+  only:
+    - branches
   script:
     - ./gradlew --build-cache :ixopay-tokenization-demoapp:assemble install
     - ./gradlew --build-cache test -Dgateway="$TEST_GATEWAY" -Dtokenization="$TEST_TOKENIZATION_HOST" -Dkey="$TEST_PUBLIC_INTEGRATION_KEY"
