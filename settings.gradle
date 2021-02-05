@@ -1,1 +1,2 @@
-include ':ixopay-tokenization-api', ':ixopay-tokenization-demoapp'
+include ':ixopay-tokenization-api'
+include ':ixopay-tokenization-demoapp'

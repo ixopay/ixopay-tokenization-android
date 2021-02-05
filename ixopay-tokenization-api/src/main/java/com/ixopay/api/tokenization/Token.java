@@ -5,11 +5,11 @@ package com.ixopay.api.tokenization;
  */
 public class Token {
 
-    public final String token;
-    public final String fingerprint;
+	public final String token;
+	public final String fingerprint;
 
-    public Token(String token, String fingerprint) {
-        this.token = token;
-        this.fingerprint = fingerprint;
-    }
+	public Token( String token, String fingerprint ) {
+		this.token = token;
+		this.fingerprint = fingerprint;
+	}
 }

@@ -7,32 +7,31 @@ version = '1.0.0'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-
 dependencies {
-    api 'com.squareup.okhttp3:okhttp:3.13.1'
-    implementation 'org.json:json:20180813'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+	api 'com.squareup.okhttp3:okhttp:3.13.1'
+	implementation 'org.json:json:20180813'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from(sourceSets.main.allSource)
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+	classifier = 'javadoc'
+	from(javadoc.destinationDir)
 }
 
 artifacts {
-    archives sourcesJar
-    archives javadocJar
+	archives sourcesJar
+	archives javadocJar
 }
 
 test {
-    useJUnitPlatform()
-    options {
-        systemProperties(System.getProperties())
-    }
+	useJUnitPlatform()
+	options {
+		systemProperties(System.getProperties())
+	}
 }
