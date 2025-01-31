@@ -1,28 +1,39 @@
 package com.ixopay.api.tokenization;
 
+import java.io.Serializable;
+
 /**
  * This class holds credit card information to be passed to the tokenization api
  */
-public class CardData {
-	public final String pan;
-	public final String cardHolder;
-	public final String cvv;
+public class CardData implements Serializable {
+    private static final long serialVersionUID = -1L;
 
-	public final int expirationMonth;
-	public final int expirationYear;
+    /** Primary Account Number (PAN). */
+    public final String pan;
+    /** Card Verification Value (CVV). */
+    public final String cardHolder;
+    /** Name of the cardholder. */
+    public final String cvv;
 
-	/**
-	 * @param pan             primary account number
-	 * @param cvv             card verification value
-	 * @param cardHolder      name of the card owner
-	 * @param expirationMonth month of the card expiration date
-	 * @param expirationYear  year of the card expiration date
-	 */
-	public CardData( String pan, String cvv, String cardHolder, int expirationMonth, int expirationYear ) {
-		this.pan = pan;
-		this.cvv = cvv;
-		this.cardHolder = cardHolder;
-		this.expirationMonth = expirationMonth;
-		this.expirationYear = expirationYear;
-	}
+    /** Month of the card expiration date. */
+    public final int expirationMonth;
+    /** Year of the card expiration date. */
+    public final int expirationYear;
+
+    /**
+     * Create new card data.
+     *
+     * @param pan             Primary Account Number (PAN).
+     * @param cvv             Card Verification Value (CVV).
+     * @param cardHolder      Name of the cardholder.
+     * @param expirationMonth Month of the card expiration date.
+     * @param expirationYear  Year of the card expiration date.
+     */
+    public CardData(String pan, String cvv, String cardHolder, int expirationMonth, int expirationYear) {
+        this.pan = pan;
+        this.cvv = cvv;
+        this.cardHolder = cardHolder;
+        this.expirationMonth = expirationMonth;
+        this.expirationYear = expirationYear;
+    }
 }

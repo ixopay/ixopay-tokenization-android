@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context=".form.FormFragment">
+
+	<data>
+		<variable
+			name="viewModel"
+			type="com.ixopay.tokenizationdemo.form.FormViewModel" />
+	</data>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="16dp">
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/cardholder_text_field"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/card_holder"
+				app:expandedHintEnabled="false"
+				app:helperText="The full name of the creditcard cardholder."
+				app:errorEnabled="true"
+				app:error="@{viewModel.cardholderValidator.error}"
+				app:layout_constraintTop_toTopOf="parent"
+				android:paddingTop="8dp"
+				android:paddingBottom="8dp">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/cardholder"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/cardholder_hint"
+					android:inputType="textPersonName"
+					android:nextFocusForward="@id/pan"
+					android:text="@={viewModel.cardholder}" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/pan_text_field"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:hint="@string/pan"
+				app:expandedHintEnabled="false"
+				app:helperText="The Primary Account Number (PAN) of the creditcard."
+				app:errorEnabled="true"
+				app:error="@{viewModel.panValidator.error}"
+				app:layout_constraintTop_toBottomOf="@+id/cardholder_text_field"
+				android:paddingBottom="8dp">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/pan"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/pan_hint"
+					android:inputType="number"
+					android:nextFocusForward="@id/expiry_month"
+					android:text="@={viewModel.pan}" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:id="@+id/constraint_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintTop_toBottomOf="@+id/pan_text_field"
+				android:paddingBottom="8dp">
+
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/expiry_month_text_field"
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:hint="@string/expiry_month"
+					app:expandedHintEnabled="false"
+					app:helperText="Expiry month."
+					app:errorEnabled="true"
+					app:error="@{viewModel.expiryMonthValidator.error}"
+					app:layout_constraintEnd_toStartOf="@+id/expiry_year_text_field"
+					app:layout_constraintStart_toStartOf="parent">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/expiry_month"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/expiry_month_hint"
+						android:inputType="number"
+						android:maxLength="2"
+						android:nextFocusForward="@id/expiry_year"
+						android:text="@={viewModel.expiryMonth}" />
+
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/expiry_year_text_field"
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_marginStart="8dp"
+					android:hint="@string/expiry_year"
+					app:expandedHintEnabled="false"
+					app:helperText="Expiry year."
+					app:errorEnabled="true"
+					app:error="@{viewModel.expiryYearValidator.error}"
+					app:layout_constraintStart_toEndOf="@+id/expiry_month_text_field">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/expiry_year"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/expiry_year_hint"
+						android:inputType="number"
+						android:maxLength="4"
+						android:nextFocusForward="@id/cvv"
+						android:text="@={viewModel.expiryYear}" />
+
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/cvv_text_field"
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:hint="@string/cvv"
+					app:expandedHintEnabled="false"
+					app:helperText="Security code."
+					app:errorEnabled="true"
+					app:error="@{viewModel.cvvValidator.error}"
+					app:layout_constraintEnd_toEndOf="parent">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/cvv"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/cvv_hint"
+						android:inputType="number"
+						android:maxLength="3"
+						android:nextFocusForward="@id/button_tokenize"
+						android:text="@={viewModel.cvv}" />
+
+				</com.google.android.material.textfield.TextInputLayout>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+			<Button
+				android:id="@+id/button_tokenize"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:text="@string/tokenize"
+				android:enabled="@{viewModel.isValidMediator}"
+				app:layout_constraintTop_toBottomOf="@+id/constraint_layout"
+				app:layout_constraintEnd_toEndOf="parent"
+				tools:layout_editor_absoluteX="16dp" />
+
+			<com.google.android.material.progressindicator.LinearProgressIndicator
+				android:id="@+id/progress_bar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:indeterminate="true"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"/>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.core.widget.NestedScrollView>
+
+</layout>

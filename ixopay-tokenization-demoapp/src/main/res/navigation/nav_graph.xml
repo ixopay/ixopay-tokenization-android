@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/nav_graph"
+	app:startDestination="@id/FormFragment">
+	<fragment
+		android:id="@+id/FormFragment"
+		android:name="com.ixopay.tokenizationdemo.form.FormFragment"
+		android:label="@string/form_fragment_label"
+		tools:layout="@layout/fragment_form">
+		<action
+			android:id="@+id/action_FormFragment_to_ResultFragment"
+			app:destination="@id/ResultFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/ResultFragment"
+		android:name="com.ixopay.tokenizationdemo.result.ResultFragment"
+		android:label="@string/result_fragment_label"
+		tools:layout="@layout/fragment_result">
+		<argument
+			android:name="tokenizeResult"
+			app:argType="com.ixopay.tokenizationdemo.util.TokenizeResult" />
+		<action
+			android:id="@+id/action_ResultFragment_to_FormFragment"
+			app:destination="@id/FormFragment" />
+	</fragment>
+</navigation>

@@ -1,36 +1,23 @@
-image: openjdk:8-jdk
+image: alvrme/alpine-android:android-34-jdk17
 
 variables:
-  ANDROID_COMPILE_SDK: "28"
-  ANDROID_BUILD_TOOLS: "28.0.2"
-  ANDROID_SDK_TOOLS:   "4333796"
+  IXOPAY_GATEWAY_HOST: "injected by runner"
+  IXOPAY_TOKENIZATION_HOST: "injected by runner"
+  IXOPAY_INTEGRATION_KEY: "injected by runner"
 
 before_script:
-  - apt-get --quiet update --yes
-  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
-  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-  - unzip -d android-sdk-linux android-sdk.zip
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
-  - export ANDROID_HOME=$PWD/android-sdk-linux
-  - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
-  - chmod +x ./gradlew
-  - set +o pipefail
-  - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
-  - set -o pipefail
-  - export GRADLE_USER_HOME=`pwd`/.gradle
+    - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build:
-  stage: build
-  only:
-    - branches
-  script:
-    - ./gradlew --build-cache :ixopay-tokenization-demoapp:assemble install
-    - ./gradlew --build-cache test -Dgateway="$TEST_GATEWAY" -Dtokenization="$TEST_TOKENIZATION_HOST" -Dkey="$TEST_PUBLIC_INTEGRATION_KEY"
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - build
-      - .gradle
+    stage: build
+    only:
+        - branches
+    script:
+        - ./gradlew --build-cache :ixopay-tokenization-demoapp:assemble :publishToMavenLocal
+        - ./gradlew --build-cache test -Dcom.ixopay.gateway_host="$IXOPAY_GATEWAY_HOST" -Dcom.ixopay.tokenization_host="$IXOPAY_TOKENIZATION_HOST" -Dcom.ixopay.integration_key="$IXOPAY_INTEGRATION_KEY"
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        policy: push
+        paths:
+            - build
+            - .gradle

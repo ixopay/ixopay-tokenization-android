@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context=".result.ResultFragment">
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<variable
+			name="viewModel"
+			type="com.ixopay.tokenizationdemo.result.ResultViewModel" />
+	</data>
+
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="16dp">
+
+			<TableLayout
+				android:id="@+id/table"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+				<TableRow
+					android:visibility="@{viewModel.token.isEmpty() ? View.GONE : View.VISIBLE}"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="8dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxWidth="150dp"
+						android:ellipsize="end"
+						android:singleLine="true"
+						android:text="@string/token" />
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:typeface="monospace"
+						android:paddingStart="8dp"
+						tools:ignore="RtlSymmetry"
+						android:text="@{viewModel.token}" />
+
+				</TableRow>
+
+				<TableRow
+					android:visibility="@{viewModel.fingerprint.isEmpty() ? View.GONE : View.VISIBLE}"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="8dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxWidth="150dp"
+						android:ellipsize="end"
+						android:singleLine="true"
+						android:text="@string/fingerprint" />
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:typeface="monospace"
+						android:paddingStart="8dp"
+						tools:ignore="RtlSymmetry"
+						android:text="@{viewModel.fingerprint}" />
+
+				</TableRow>
+
+				<TableRow
+					android:visibility="@{viewModel.errorMessage.isEmpty() ? View.GONE : View.VISIBLE}"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="8dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxWidth="150dp"
+						android:ellipsize="end"
+						android:singleLine="true"
+						android:text="@string/error" />
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:typeface="monospace"
+						android:paddingStart="8dp"
+						tools:ignore="RtlSymmetry"
+						android:text="@{viewModel.errorMessage}" />
+
+				</TableRow>
+
+				<TableRow
+					android:visibility="@{viewModel.errorStacktrace.isEmpty() ? View.GONE : View.VISIBLE}"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="8dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxWidth="150dp"
+						android:ellipsize="end"
+						android:singleLine="true"
+						android:text="@string/stacktrace" />
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:typeface="monospace"
+						android:text="@{viewModel.errorStacktrace}" />
+
+				</TableRow>
+			</TableLayout>
+
+			<Button
+				android:id="@+id/button_previous"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/previous"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/table" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.core.widget.NestedScrollView>
+
+</layout>
